@@ -1,22 +1,8 @@
 #!/bin/bash
-# bootstrap.sh — checks whether every tool this dotfiles setup depends on
-# is already installed, and offers to install anything missing. Prompts
-# y/n before every individual install; nothing installs silently.
-#
-# Run this BEFORE setup.sh. This script only installs tools; setup.sh only
-# symlinks config files into place — the two are kept separate on purpose
-# (installing is independent per-tool and safe to keep going after one
-# failure; symlinking involves moving real files and should stop on the
-# first unexpected problem instead of plowing ahead).
-#
-# Safe to re-run: anything already installed is reported and skipped, no
-# prompt shown for it.
-
 failed=()
 
 confirm() {
-  # $1 = prompt text. Returns success (0) only on an explicit y/Y answer;
-  # anything else, including just hitting enter, is treated as no.
+  # $1 = prompt text. Returns success (0) only on an explicit y/Y answer. Anything else, including just hitting enter, is treated as no.
   local reply
   read -r -p "$1 [y/N] " reply
   [[ "$reply" =~ ^[Yy]$ ]]
@@ -29,8 +15,7 @@ else
   echo "Homebrew: not found"
   if confirm "Install Homebrew now?"; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    # Load brew into THIS shell so the installs below can find it —
-    # the installer sets up shell config for future shells, not this one.
+    # Load brew into THIS shell so the installs below can find it. The installer sets up shell config for future shells, not this one.
     if [[ -x /opt/homebrew/bin/brew ]]; then
       eval "$(/opt/homebrew/bin/brew shellenv)"
     elif [[ -x /usr/local/bin/brew ]]; then

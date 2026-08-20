@@ -1,24 +1,4 @@
 #!/bin/bash
-# setup.sh — bootstraps symlinks between ~/dotfiles and their live locations.
-#
-# Two use cases, same script:
-#  1. First run on this machine: adopts your existing live config files
-#     INTO ~/dotfiles (moves them, doesn't copy), then symlinks the live
-#     paths back to the repo. Nothing is fabricated or overwritten — it
-#     picks up whatever's actually on disk right now.
-#  2. Fresh machine: after `git clone` this repo to ~/dotfiles and running
-#     this script again, the repo already has tracked files, so it treats
-#     the repo as the source of truth — any conflicting live file gets
-#     backed up to <file>.bak rather than silently overwritten, then the
-#     live path is symlinked to the repo's version.
-#
-# Safe to re-run. Already-symlinked paths are skipped.
-#
-# PREREQUISITE: run this only after tmux.conf is placed at ~/.tmux.conf and
-# git-delta-setup.sh has been run at least once, if this is the very first
-# time setting up on this machine (so there's something real to adopt for
-# those two files, rather than adopting an empty stub).
-
 set -e
 
 DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -34,9 +14,7 @@ link() {
   fi
 
   if [ -f "$target" ]; then
-    # Repo already tracks this file (e.g. cloned on a new machine) —
-    # treat the repo as the source of truth. Don't let a pre-existing
-    # live file (e.g. a fresh app's default config) silently clobber it.
+    # Repo already tracks this file (e.g. cloned on a new machine). Treat the repo as the source of truth. Don't let a pre-existing live file (e.g. a fresh app's default config) silently clobber it.
     if [ -f "$live" ]; then
       mv "$live" "$live.bak"
       echo "backed up pre-existing $live -> $live.bak (repo version wins)"
