@@ -1,12 +1,9 @@
+# --- pyenv ---
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 
-# Append this whole block to the end of your existing ~/.zshrc
-# (Or replace ~/.zshrc with it if you're starting fresh — you have no
-# oh-my-zsh to preserve, so there's nothing to conflict with.)
-
-# --- Homebrew (Apple Silicon path; drop this line on Intel Macs) ---
+# --- Homebrew ---
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # --- History ---
