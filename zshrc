@@ -55,3 +55,5 @@ unset _autosuggest _synhl
 alias ll='ls -lahG'
 alias tm='tmux new -A -s main'   # create-or-attach to a session called "main"
 command -v bat >/dev/null 2>&1 && alias cat='bat --paging=never'
+command -v eza >/dev/null 2>&1 && alias ls='eza --icons'
+command -v eza >/dev/null 2>&1 && alias ll='eza -lh --icons'
