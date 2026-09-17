@@ -15,8 +15,6 @@ nothing to keep manually in sync.
 | `bootstrap.sh` | N/A | installs every tool these configs depend on |
 | `setup.sh` | N/A | symlinks each file above into its live location |
 
-tmux isn't part of this setup yet.
-
 ## New machine setup
 
 ```bash
