@@ -35,7 +35,7 @@ link() {
 }
 
 link "$HOME/.zshrc" "zshrc"
-# link "$HOME/.tmux.conf" "tmux.conf"
+link "$HOME/.tmux.conf" "tmux.conf"
 link "$HOME/.vimrc" "vimrc"
 link "$HOME/.gitconfig" "gitconfig"
 link "$HOME/Library/Application Support/com.mitchellh.ghostty/config.ghostty" "ghostty/config.ghostty"
